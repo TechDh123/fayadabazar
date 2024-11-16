@@ -111,21 +111,21 @@ import 'electricitybilloperators/apsdclandhrapradeshinsertion.dart';
 
 
 @pragma('vm:entry-point')
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-
-  if (kDebugMode) {
-    print(message.notification!.title.toString());
-  }
-  if (kDebugMode) {
-    print(message.notification!.body.toString());
-  }
-}
+// Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//
+//   if (kDebugMode) {
+//     print(message.notification!.title.toString());
+//   }
+//   if (kDebugMode) {
+//     print(message.notification!.body.toString());
+//   }
+// }
 
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
   FirebaseAppCheck.instance.setDebugModeEnabled(true);
 

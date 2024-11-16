@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
-import 'package:excel/excel.dart' as excel;
+// import 'package:excel/excel.dart' as excel;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
@@ -59,64 +59,64 @@ class _VerifyCustomerDocumentState extends State<VerifyCustomerDocument> {
     );
   }
 
-  void _exportToExcel() async {
-    var status = await Permission.storage.request();
-    if (status.isGranted) {
-      var excelFile = excel.Excel.createExcel();
-      excel.Sheet sheet = excelFile['Sheet1'];
-
-      sheet.appendRow([
-        'Member ID',
-        'Member Name',
-        'Sponsor ID',
-        'Sponsor Name',
-        'Email',
-        'Mobile Number',
-        'PAN',
-        'Vendor Name',
-        'Package Name'
-      ]);
-
-      sheet.appendRow([
-        _memberIdController.text,
-        _memberNameController.text,
-        _sponsorIdController.text,
-        _sponsorNameController.text,
-        _emailController.text,
-        _mobileController.text,
-        _panController.text,
-        _vendorNameController.text,
-        _packageNameController.text,
-        _actionController.text,
-        _createDataController.text
-      ]);
-
-      Directory? downloadsDirectory = await getDownloadsDirectory();
-      if (downloadsDirectory != null) {
-        String path = "${downloadsDirectory.path}/records.xlsx";
-        final file = File(path);
-        await file.writeAsBytes(await excelFile.save() ?? []);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Excel file created: $path')),
-        );
-
-        Share.shareFiles([path],
-            text: 'Here is the records Excel file!',
-            mimeTypes: [
-              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-            ]);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to get Downloads directory')),
-        );
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Permission denied!')),
-      );
-    }
-  }
+  // void _exportToExcel() async {
+  //   var status = await Permission.storage.request();
+  //   if (status.isGranted) {
+  //     var excelFile = excel.Excel.createExcel();
+  //     excel.Sheet sheet = excelFile['Sheet1'];
+  //
+  //     sheet.appendRow([
+  //       'Member ID',
+  //       'Member Name',
+  //       'Sponsor ID',
+  //       'Sponsor Name',
+  //       'Email',
+  //       'Mobile Number',
+  //       'PAN',
+  //       'Vendor Name',
+  //       'Package Name'
+  //     ]);
+  //
+  //     sheet.appendRow([
+  //       _memberIdController.text,
+  //       _memberNameController.text,
+  //       _sponsorIdController.text,
+  //       _sponsorNameController.text,
+  //       _emailController.text,
+  //       _mobileController.text,
+  //       _panController.text,
+  //       _vendorNameController.text,
+  //       _packageNameController.text,
+  //       _actionController.text,
+  //       _createDataController.text
+  //     ]);
+  //
+  //     Directory? downloadsDirectory = await getDownloadsDirectory();
+  //     if (downloadsDirectory != null) {
+  //       String path = "${downloadsDirectory.path}/records.xlsx";
+  //       final file = File(path);
+  //       await file.writeAsBytes(await excelFile.save() ?? []);
+  //
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text('Excel file created: $path')),
+  //       );
+  //
+  //       Share.shareFiles([path],
+  //           text: 'Here is the records Excel file!',
+  //           mimeTypes: [
+  //             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  //           ]);
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Failed to get Downloads directory')),
+  //       );
+  //     }
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Permission denied!')),
+  //     );
+  //   }
+  // }
 
   Future<Directory?> getDownloadsDirectory() async {
     if (Platform.isAndroid) {
