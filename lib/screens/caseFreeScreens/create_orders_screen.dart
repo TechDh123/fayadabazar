@@ -39,10 +39,10 @@
 
     String? cfOrderId;
     String? sessionId;
-
-    final String clientId = '77001863cd385d3ac6a7130d0a810077';
-    final String clientSecret =
-        'cfsk_ma_prod_0e70aa93c4d44072697ab69f10826dc9_590513e6';
+    //
+    // final String clientId = '77001863cd385d3ac6a7130d0a810077';
+    // final String clientSecret =
+    //     'cfsk_ma_prod_0e70aa93c4d44072697ab69f10826dc9_590513e6';
     // final String environment = 'PRODUCTION'; // or 'TEST'
     CFEnvironment environment = CFEnvironment.SANDBOX;
     var cfPaymentGatewayService = CFPaymentGatewayService();
@@ -71,8 +71,8 @@
         url,
         headers: {
           'Content-Type': 'application/json',
-          'X-Client-Id': clientId,
-          'X-Client-Secret': clientSecret,
+          // 'X-Client-Id': clientId,
+          // 'X-Client-Secret': clientSecret,
           'x-api-version': '2023-08-01',
           'X-Environment': environment.toString()
         },
