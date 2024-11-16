@@ -20,7 +20,9 @@ import 'package:flutter_cashfree_pg_sdk/api/cfupi/cfupiutils.dart';
 
 
 class PaymentsFinal extends StatefulWidget {
-  const PaymentsFinal({Key? key}) : super(key: key);
+ var OrederId;
+ var sessionId;
+   PaymentsFinal({Key? key, required this.OrederId,required this.sessionId,}) : super(key: key);
 
   @override
   State<PaymentsFinal> createState() => _PaymentsFinalState();
@@ -94,6 +96,12 @@ class _PaymentsFinalState extends State<PaymentsFinal> {
               //   width: 500,
               //   child: WebViewWidget(controller: controller),
               // )
+
+
+
+
+
+
               TextButton(onPressed: pay, child: const Text("Pay")),
               TextButton(onPressed: webCheckout, child: const Text("Web Checkout")),
               cfCardWidget!,
@@ -126,8 +134,6 @@ class _PaymentsFinalState extends State<PaymentsFinal> {
     print(cardListener.getMetaData());
   }
 
-  String orderId = "order_6032i376cpyIuTTVae9vnqfmtgT8Hj";
-  String paymentSessionId = "session_nfU1ZczDG136bf7N7EQv6C6kL0dZn3Xw8EYtHmpmt0_dqt493wRnYG7PuUEuv96G57DuMOobE39WVnUth3tgd5k_odWFHa8dHIWoFzs3RzHS";
   void receivedEvent(String event_name, Map<dynamic, dynamic> meta_data) {
     print(event_name);
     print(meta_data);
@@ -138,19 +144,26 @@ class _PaymentsFinalState extends State<PaymentsFinal> {
 
   // String orderId = "order_18482OupTxSofcClBAlgqyYxUVceHo8";
   // String paymentSessionId = "session_oeYlKCusKyW5pND4Swzn1rE2-gwnoM8MOC2nck9RjIiUQwXcPLWB3U1xHaaItb-uA9H1k6Fwziq9O63DWcfYGy_3B7rl1nDFo3MMeVqiYrBr";
-  CFEnvironment environment = CFEnvironment.SANDBOX;
-  String selectedId = "";
+  CFEnvironment environment = CFEnvironment.PRODUCTION;
+  String selectedId = "jaypanchal8140336517@oksbi";
 
   upiCollectPay() async {
     try {
       var session = createSession();
-      var upi = CFUPIBuilder().setChannel(CFUPIChannel.COLLECT).setUPIID("suhasg6@ybl").build();
-      var upiPayment = CFUPIPaymentBuilder().setSession(session!).setUPI(upi).build();
+      var upi = CFUPIBuilder()
+          .setChannel(CFUPIChannel.COLLECT)
+          .setUPIID("chetanbhai.dhruv@okicici")  // replace with a valid UPI ID
+          .build();
+      var upiPayment = CFUPIPaymentBuilder()
+          .setSession(session!)
+          .setUPI(upi)
+          .build();
       cfPaymentGatewayService.doPayment(upiPayment);
     } on CFException catch (e) {
-      print(e.message);
+      print("Error in UPI Collect: ${e.message}");
     }
   }
+
 
   netbankingPay() async {
     try {
@@ -207,8 +220,8 @@ class _PaymentsFinalState extends State<PaymentsFinal> {
 
   CFSession? createSession() {
     try {
-      String oid = "2185939474";
-      String spi = "session_Kkw0EViTrvTgkZH8AeNl4YmifuqLc5LLCjRCSTZwMcbtSIIxIljkO8UDF5Sykev-4s1LSAAA8AQHOQ_ZUVnfAlU_h6S7_vgqa_EDdAYZXIvo";
+      String oid = "${widget.OrederId}";
+      String spi = "${widget.sessionId}";
       // var oid = "order_18482hmCisOicEvPWfsUSHXwAlp4LjU";
       // var spi = "session_Qhf6IS3AmPOOC1gg7Pz2rkSG1g4So8QRvLovw5WcEbKRKXULMhqFYhNqOchqPwp3hTvwBNPPIbpHRjh5gkwWgsUWw2gO8JPZjfPQwb7IC0sn";
       var session = CFSessionBuilder().setEnvironment(environment).setOrderId(oid).setPaymentSessionId(spi).build();

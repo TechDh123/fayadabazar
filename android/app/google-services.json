@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "595211389121",
-    "project_id": "faydabazar-88906",
-    "storage_bucket": "faydabazar-88906.appspot.com"
+    "project_number": "533422893687",
+    "project_id": "finalfaydabazar",
+    "storage_bucket": "finalfaydabazar.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:595211389121:android:c4ce4d2d060779d5852c40",
+        "mobilesdk_app_id": "1:533422893687:android:cf3416883c065da5df3472",
         "android_client_info": {
           "package_name": "com.example.faydabazar"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBIs6xdz6xEJYYFKFlVwkmGfOgeMyOBzeM"
+          "current_key": "AIzaSyCzRPRgi1aITiovy14tpcf6hWYU0NVNGOg"
         }
       ],
       "services": {

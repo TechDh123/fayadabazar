@@ -1,4 +1,5 @@
 import 'package:faydabazar/Home.dart';
+import 'package:faydabazar/VerndorBigRegistration.dart';
 import 'package:faydabazar/aboutus.dart';
 import 'package:faydabazar/amountpagewithfetchplan.dart';
 import 'package:faydabazar/category.dart';
@@ -11,6 +12,7 @@ import 'package:faydabazar/datacardoperators/tatadocomoinsertion.dart';
 import 'package:faydabazar/datacardoperators/tatadocomopayment.dart';
 import 'package:faydabazar/datacardoperators/vodafonedatacardinsertion.dart';
 import 'package:faydabazar/datacardoperators/vodafonedatacardpayment.dart';
+import 'package:faydabazar/digitalapmc.dart';
 import 'package:faydabazar/directincome.dart';
 import 'package:faydabazar/discount.dart';
 import 'package:faydabazar/dthoperators/dthoperators.dart';
@@ -47,7 +49,9 @@ import 'package:faydabazar/fbbackendcode/memberwelcomeletter.dart';
 import 'package:faydabazar/fbbackendcode/paymentintegration.dart';
 import 'package:faydabazar/fbbackendcode/verifycustomerdocument.dart';
 import 'package:faydabazar/fetchplanpage.dart';
+import 'package:faydabazar/flourfactory.dart';
 import 'package:faydabazar/gasbilloperators.dart';
+import 'package:faydabazar/hotels.dart';
 import 'package:faydabazar/insuranceoperator/iciciinsuranceinsertion.dart';
 import 'package:faydabazar/insuranceoperator/iciciinsurancepaymentpage.dart';
 
@@ -79,16 +83,23 @@ import 'package:faydabazar/memberdownline.dart';
 import 'package:faydabazar/membermaster.dart';
 import 'package:faydabazar/landlineoperators/mtnldelhipayment.dart';
 import 'package:faydabazar/mywallet.dart';
+import 'package:faydabazar/pagereviewnew.dart';
 import 'package:faydabazar/payment2.dart';
 import 'package:faydabazar/paymentemi.dart';
 import 'package:faydabazar/paymentscreen.dart';
 import 'package:faydabazar/personalinformation.dart';
 import 'package:faydabazar/postpaidrechargeoperators/postpaidoperators.dart';
+
 import 'package:faydabazar/rechargelatesthistory.dart';
 import 'package:faydabazar/referralincome.dart';
 import 'package:faydabazar/municipalsearchoperator.dart';
+import 'package:faydabazar/screens/caseFreeScreens/create_orders_screen.dart';
 
 import 'package:faydabazar/secondpage.dart';
+import 'package:faydabazar/sellyouranimal.dart';
+import 'package:faydabazar/sellyourcrops.dart';
+import 'package:faydabazar/sellyourland.dart';
+import 'package:faydabazar/sellyourvehicle.dart';
 import 'package:faydabazar/sendfundrequest.dart';
 import 'package:faydabazar/splashscreen.dart';
 import 'package:faydabazar/successfully.dart';
@@ -108,6 +119,7 @@ import 'package:faydabazar/BillPayment.dart';
 import 'package:provider/provider.dart';
 
 import 'electricitybilloperators/apsdclandhrapradeshinsertion.dart';
+import 'newpagereview.dart';
 
 
 @pragma('vm:entry-point')
@@ -148,8 +160,10 @@ extension on FirebaseAppCheck {
 }
 
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
