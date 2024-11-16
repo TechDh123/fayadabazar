@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCHjcNiuZcuwqON4xSUTu0BbcbzLxoBWrU',
-    appId: '1:905034820114:android:d54488bbbceac0ead546cb',
-    messagingSenderId: '905034820114',
-    projectId: 'faydabazr',
-    storageBucket: 'faydabazr.firebasestorage.app',
+    apiKey: 'AIzaSyBM1RRObnj9-nIXByUszb7RgBcrvpaG2TA',
+    appId: '1:374954373213:android:5f4ea147e8e8a7fcb59db4',
+    messagingSenderId: '374954373213',
+    projectId: 'faydabazar-007',
+    storageBucket: 'faydabazar-007.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD-VnrGU3MeXEJZtSEjoREsze7Ty_RTun8',
-    appId: '1:905034820114:ios:e26001f6e44e89f2d546cb',
-    messagingSenderId: '905034820114',
-    projectId: 'faydabazr',
-    storageBucket: 'faydabazr.firebasestorage.app',
+    apiKey: 'AIzaSyDIwyyw0B9P_N_KBt0FZvh38JSPMj-iqjg',
+    appId: '1:374954373213:ios:f8e6cff201ad5621b59db4',
+    messagingSenderId: '374954373213',
+    projectId: 'faydabazar-007',
+    storageBucket: 'faydabazar-007.firebasestorage.app',
     iosBundleId: 'com.example.faydabazar',
   );
+
 }

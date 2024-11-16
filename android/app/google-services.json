@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "905034820114",
-    "project_id": "faydabazr",
-    "storage_bucket": "faydabazr.firebasestorage.app"
+    "project_number": "374954373213",
+    "project_id": "faydabazar-007",
+    "storage_bucket": "faydabazar-007.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:905034820114:android:d54488bbbceac0ead546cb",
+        "mobilesdk_app_id": "1:374954373213:android:5f4ea147e8e8a7fcb59db4",
         "android_client_info": {
-          "package_name": "com.fayadabazar.com"
+          "package_name": "com.example.faydabazar"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCHjcNiuZcuwqON4xSUTu0BbcbzLxoBWrU"
+          "current_key": "AIzaSyBM1RRObnj9-nIXByUszb7RgBcrvpaG2TA"
         }
       ],
       "services": {
