@@ -1,20 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class Exploreestates extends StatefulWidget {
-  const Exploreestates({super.key});
+class ExploreEstates extends StatefulWidget {
+  const ExploreEstates({super.key});
 
   @override
-  State<Exploreestates> createState() => _ExploreestatesState();
+  State<ExploreEstates> createState() => _ExploreEstatesState();
 }
 
-class _ExploreestatesState extends State<Exploreestates> {
-  List<bool> favoriteStates = [true, false, false, false, false]; // Track favorite states
+class _ExploreEstatesState extends State<ExploreEstates> {
+  List<Map<String, dynamic>> estates = [];
+  bool _isLoading = true;
 
-  void toggleFavorite(int index) {
-    setState(() {
-      favoriteStates[index] = !favoriteStates[index];
-    });
+  @override
+  void initState() {
+    super.initState();
+    _fetchEstates();
+  }
+
+  Future<void> _fetchEstates() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('VendorRegistration')
+          .get();
+
+      List<Map<String, dynamic>> fetchedEstates = [];
+
+      for (var doc in querySnapshot.docs) {
+        fetchedEstates.add(doc.data() as Map<String, dynamic>);
+      }
+
+      setState(() {
+        estates = fetchedEstates;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print("Error fetching estates: $e");
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -57,51 +84,26 @@ class _ExploreestatesState extends State<Exploreestates> {
           ),
         ),
       ),
-      body: Padding(
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            EstateCard(
-              estateName: 'Wings Tower',
-              location: 'Jakarta, India',
-              distance: '12.1 km',
-              availableUntil: '7:00 pm',
-              isFavorite: favoriteStates[0],
-              onFavoriteToggle: () => toggleFavorite(0),
-            ),
-            EstateCard(
-              estateName: 'Roman Wings',
-              location: 'Jakarta, India',
-              distance: '12.1 km',
-              availableUntil: '7:00 pm',
-              isFavorite: favoriteStates[1],
-              onFavoriteToggle: () => toggleFavorite(1),
-            ),
-            EstateCard(
-              estateName: 'Roman Wings',
-              location: 'Jakarta, India',
-              distance: '11.1 km',
-              availableUntil: '7:00 pm',
-              isFavorite: favoriteStates[2],
-              onFavoriteToggle: () => toggleFavorite(2),
-            ),
-            EstateCard(
-              estateName: 'Roman Wings',
-              location: 'Jakarta, India',
-              distance: '11.1 km',
-              availableUntil: '7:00 pm',
-              isFavorite: favoriteStates[3],
-              onFavoriteToggle: () => toggleFavorite(3),
-            ),
-            EstateCard(
-              estateName: 'Roman Wings',
-              location: 'Jakarta, India',
-              distance: '11.1 km',
-              availableUntil: '7:00 pm',
-              isFavorite: favoriteStates[4],
-              onFavoriteToggle: () => toggleFavorite(4),
-            ),
-          ],
+        child: ListView.builder(
+          itemCount: estates.length,
+          itemBuilder: (context, index) {
+            var estate = estates[index];
+            return EstateCard(
+              estateName: estate['firmName'] ?? 'Unknown Firm',
+              location: '${estate['cityName']}, ${estate['stateName']}',
+              distance: '12.1 km', // Placeholder; modify as needed
+              availableUntil: 'Available until ${estate['starttime']} - ${estate['closetime']}',
+              mobileNo: estate['mobileNo'] ?? '', // Use mobileNo from Firestore
+              isFavorite: false,
+              onFavoriteToggle: () {
+                // Implement favorite toggle logic if needed
+              },
+            );
+          },
         ),
       ),
     );
@@ -113,16 +115,18 @@ class EstateCard extends StatelessWidget {
   final String location;
   final String distance;
   final String availableUntil;
+  final String mobileNo;
   final bool isFavorite;
-  final VoidCallback onFavoriteToggle; // Add this
+  final VoidCallback onFavoriteToggle;
 
   const EstateCard({
     required this.estateName,
     required this.location,
     required this.distance,
     required this.availableUntil,
+    required this.mobileNo,
     required this.isFavorite,
-    required this.onFavoriteToggle, // Add this
+    required this.onFavoriteToggle,
     Key? key,
   }) : super(key: key);
 
@@ -160,7 +164,6 @@ class EstateCard extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Image Container with solid border
                     Container(
                       width: 120,
                       height: 120,
@@ -177,7 +180,6 @@ class EstateCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    // Estate Info
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,7 +199,7 @@ class EstateCard extends StatelessWidget {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: onFavoriteToggle, // Add the onTap callback
+                                onTap: onFavoriteToggle,
                                 child: Icon(
                                   isFavorite ? Icons.favorite : Icons.favorite_border,
                                   color: isFavorite ? Colors.red : Colors.grey,
@@ -221,7 +223,7 @@ class EstateCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            'Available Until $availableUntil',
+                            availableUntil,
                             style: const TextStyle(
                               color: Colors.green,
                               fontSize: 14,
@@ -234,14 +236,19 @@ class EstateCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                // Buttons Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Call Now button
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final Uri callUri = Uri(scheme: 'tel', path: mobileNo);
+                          if (await canLaunchUrl(callUri)) {
+                            await launchUrl(callUri);
+                          } else {
+                            print("Could not launch dialer");
+                          }
+                        },
                         icon: const Icon(Icons.call, size: 18, color: Colors.orange),
                         label: const Text('Call Now', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
                         style: ElevatedButton.styleFrom(
@@ -252,12 +259,18 @@ class EstateCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    // Chat button
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final Uri whatsappUri = Uri.parse('https://wa.me/$mobileNo');
+                          if (await canLaunchUrl(whatsappUri)) {
+                            await launchUrl(whatsappUri);
+                          } else {
+                            print("Could not launch WhatsApp");
+                          }
+                        },
                         icon: const FaIcon(FontAwesomeIcons.whatsapp, size: 18, color: Colors.lightGreenAccent),
-                        label: const Text('Chat', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.lightGreenAccent)),
+                        label: const Text('Ct', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.lightGreenAccent)),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                           backgroundColor: Colors.green,

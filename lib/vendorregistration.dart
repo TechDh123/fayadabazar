@@ -28,7 +28,7 @@ class _VendorRegistrationState extends State<VendorRegistration> {
     "Plastic material", "Printing press", "Real Estate", "Rent & Hire",
     "Restaurants", "Security Service", "Spa Parlour", "Sports", "Stationary",
     "Sweet Mart", "Tailors", "Tattoo Studio", "Tea Stall", "Temple", "Tours & Travels",
-    "Toys & Gifts", "Two Wheeler Showroom", "Tyre Puncture", "Vegetable",
+    "Toys & Gifts", "Two Wheeler Showroom", "Tyre Puncture", "Vegetables",
     "Water Supplier", "Wedding & Birthday Planner", "Women Wear",
   ];
   final List<String> _states = [

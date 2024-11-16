@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class Signup extends StatefulWidget {
   const Signup({super.key});
 
@@ -35,6 +36,7 @@ class _SignupState extends State<Signup> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+
   }
 
   String? _validateEmail(String? value) {
@@ -98,7 +100,7 @@ class _SignupState extends State<Signup> {
       });
 
       try {
-        // Create user
+
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _memberIdController.text.trim(),
           password: _passwordController.text,

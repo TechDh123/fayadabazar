@@ -202,9 +202,10 @@ class _HomeState extends State<Home> {
                   text: 'Fayda',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontFamily:'Times new roman',
                     color: Colors.orange,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 30,
+
+                    fontSize: 29,
                   ),
                 ),
                 TextSpan(
@@ -212,8 +213,8 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 30,
+                  fontFamily: 'Times new roman',
+                    fontSize: 29,
                   ),
                 ),
               ],
@@ -899,6 +900,9 @@ class _HomeState extends State<Home> {
                           ),
                         ),
 
+
+
+
                         if (showAdContainer)
                           Positioned(
                             top: screenSize.height * 0.01,
@@ -1155,12 +1159,13 @@ class CategoryIconModel {
 }
 
 List<String> topCategoriesImages = [
-  'assets/images/o.png',
-  'assets/images/p.png',
-  'assets/images/c.png',
-  'assets/images/m.png',
-  'assets/images/b.png',
-  'assets/images/r.png',
+  'assets/images/hotel1.png',
+  'assets/images/fastfood.png',
+  'assets/images/menwear.png',
+  'assets/images/icecream.png',
+  'assets/images/bakery.png',
+  'assets/images/restaurants.png',
+
 ];
 
 List<String> specialoffrecesImages = [
